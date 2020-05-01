@@ -1,11 +1,14 @@
 kind: Deployment
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 metadata:
   name: coordinator
   labels:
     presto: coordinator
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      presto: coordinator
   template:
     metadata:
       labels:
@@ -21,7 +24,7 @@ spec:
           value: "10"
         - name: PRESTO_MAX_MEMORY_PER_NODE
           value: "1"
-        image: johandry/presto
+        image: johandry/presto:latest
         livenessProbe:
           exec:
             command:

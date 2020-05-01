@@ -1,11 +1,14 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     presto: worker
   name: worker
 spec:
-  replicas: 1
+  replicas: 2
+  selector:
+    matchLabels:
+      presto: worker
   template:
     metadata:
       labels:
